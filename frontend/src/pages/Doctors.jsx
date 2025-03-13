@@ -4,11 +4,11 @@ import { AppContext } from '../context/AppContext';
 
 const Doctors = () => {
   const {speciality}=useParams();
-  console.log(speciality);
+  // console.log(speciality);
 
   const [FilteredDoc,setFilteredDoc]=useState([]);
   const {doctors}=useContext(AppContext);
-  const [showFilter,setShowFilters]=useState(false);
+  const [showFilter,setShowFilters]=useState(true);
   const navigate=useNavigate();
 
   const applyFilter=()=>{
@@ -41,15 +41,18 @@ const Doctors = () => {
         </div>
 
         {/* doc list */}
-        <div className='w-full grid max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6 justify-between'>
+        <div className='w-full max-w-[1200px] mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6 justify-between'>
           {
             FilteredDoc.map((item,index)=>(
               <div onClick={()=>(navigate(`/appointment/${item._id}`))} className= ' border border-blue-200 rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px]  transition-all duration-500' key={index}>
                         <img className='bg-blue-50' src={item.image} alt="" />
                         <div className='p-4'>
-                            <div className='flex items-center gap-2 text-sm text-center text-green-500'>
+                            {/* <div className='flex items-center gap-2 text-sm text-center text-green-500'>
                                 <p className='w-2 h-2 bg-green-500 rounded-full'></p>
                                 <p>Available</p>
+                            </div> */}
+                            <div className={`flex items-center gap-2 text-sm text-center ${item.available ? 'text-green-500' : "text-gray-500"}`}>
+                                <p className={`w-2 h-2 rounded-full ${item.available ? 'bg-green-500' : "bg-gray-500"}`}></p><p>{item.available ? 'Available' : "Not Available"}</p>
                             </div>
                             <p className= 'text-gray-900 text-lg font-medium'>{item.name}</p>
                             <p className= 'text-gray-600 text-s'>{item.speciality}</p>
