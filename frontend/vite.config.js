@@ -18,5 +18,10 @@ export default defineConfig({
     tailwindcss(),
 
   ],
-  server:{port:5173}
+  // server:{port:5173}
+  server: {
+    host: '0.0.0.0',  // Ensure Vite binds to 0.0.0.0
+    port: process.env.PORT || 5173,  // Use Render-assigned port
+    strictPort: true
+  }
 })
