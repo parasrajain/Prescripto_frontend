@@ -23,6 +23,6 @@ export default defineConfig({
     host: '0.0.0.0',  // Ensure Vite binds to 0.0.0.0
     port: process.env.PORT || 5173,  // Use Render-assigned port
     strictPort: true,
-    allowedHosts: ['prescripto-frontend-5-4tfm.onrender.com']
+    allowedHosts: 'all'
   }
 })
