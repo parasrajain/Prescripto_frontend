@@ -19,10 +19,28 @@ export default defineConfig({
 
   ],
   // server:{port:5173}
+  // server: {
+  //   host: '0.0.0.0',  // Ensure Vite binds to 0.0.0.0
+  //   port: process.env.PORT || 5173,  // Use Render-assigned port
+  //   strictPort: true,
+  //   allowedHosts: ['prescripto-frontend-7-8coi.onrender.com'],
+  // }
   server: {
-    host: '0.0.0.0',  // Ensure Vite binds to 0.0.0.0
-    port: process.env.PORT || 5173,  // Use Render-assigned port
+    host: '0.0.0.0',
+    port: process.env.PORT || 5173,
     strictPort: true,
+    cors: true,  // Enable CORS
     allowedHosts: ['prescripto-frontend-7-8coi.onrender.com'],
-  }
+    proxy: {
+      '/api': {
+        target: 'https://prescripto-backend-3.onrender.com',  // Change this to your backend URL
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
+  preview: {
+    host: '0.0.0.0',
+    port: 5173,
+  },
 })
